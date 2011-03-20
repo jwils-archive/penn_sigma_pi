@@ -1,0 +1,47 @@
+<div class="grid_12">
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Title:</b>  
+  <%= @post.title %> Posted <%=time_ago_in_words(@post.created_at)%> ago<br />
+</p>
+
+<p>
+  <b>Author:</b>
+  <%= @post.person.name %>
+</p>
+
+<p>
+  <b>Body:</b>
+  <%= @post.body %>
+</p>
+<% if @user%>
+	<%if @user = @post.person%>
+		<%= link_to 'Edit', edit_post_path(@post) %> |
+		
+	<%end%>
+<%end%>
+<%= link_to 'Back', posts_path %>
+
+<h2><span id="comments_count"><%= pluralize(@post.comments.count, "Comment") %></span></h2>
+<div id="comments">
+  <%= render :partial => @post.comments, :locals => { :list => true } %>
+</div>
+
+<hr />
+
+<div id="comment-notice"></div>
+
+<h2>Say something!</h2>
+
+<%= form_tag Comment.new, :remote => true , :method => :post, :id => 'comment_form' do %>
+	<%= hidden_field_tag :post_id, @post.id%>
+	<%= label_tag :body, "Comment" %><br />
+	<%= text_area_tag :body, "", :size=> "80x3" %><br />
+	<%= submit_tag "Add comment"%>
+<% end %>
+
+
+
+
+</div>

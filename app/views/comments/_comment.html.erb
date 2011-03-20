@@ -1,0 +1,14 @@
+<%= div_for comment do %>
+	<b><%= comment.person.name %></b> wrote:
+  <%= comment.body %>
+  <% if @user %>
+    <% if @user = @post.person%>
+      <%= link_to 'Delete', comment_path(comment), :method => :delete, :class => "delete", :remote => true  %>
+	<%end%>
+  <%end%>
+  	<br />
+  	<span class="dateandoptions">
+    Posted <%=time_ago_in_words(comment.created_at)%> ago<br />
+  </span>
+  	<br />
+<% end %>

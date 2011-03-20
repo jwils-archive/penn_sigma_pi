@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>Sigma Pi Delta Chapter</title>
+  <%= stylesheet_link_tag :all %>
+  <%= javascript_include_tag :all %>
+  <%= javascript_include_tag  "http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js" %>
+  <%= javascript_include_tag  "http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/jquery-ui.min.js" %>
+  <%= javascript_include_tag "jquery-rails.js" %>
+  <%= csrf_meta_tag %>
+
+</head>
+<body>
+<div id="header" class="container_12" >
+	<div class="grid_3">
+		<h1>Sigma Pi <br />Delta Chapter</h1>
+	</div>
+	
+	<div class="grid_9">
+		<% if @user %>
+    <%= link_to "Edit Account", edit_person_path('account') %> -
+    <%= link_to 'Logout', @application_session, :method => :delete %>
+  <% else %>
+    <%= link_to "Login", new_session_path %> -
+    <%= link_to "Register", new_person_path %>
+  <% end %>
+  <br />
+		Insert Image here (720x240?)
+	</div>	
+	<div class="clear"></div>
+	<div id='flash' class="grid_12">
+		<%= " #{flash[:notice]}" if flash[:notice] %>
+	</div>
+	<div class="clear"></div>
+</div>
+
+<div id='nav_bar' class="container_12">
+	<div class='grid_2'>
+		<%= link_to "Home", :controller => "pages", :action => "home" %>
+	</div>
+	
+	<div class='grid_2'>
+		<%= link_to "About", :controller => "pages", :action => "about" %>
+	</div>
+	
+	<div class='grid_2'>
+		<%= link_to "Blog", :controller => "posts", :action=> "index" %>
+	</div>
+	
+	<div class='grid_2'>
+		<%= link_to "Donate", :controller => "wish_list_items", :action=> "index"%>
+	</div>
+	
+	<div class='grid_2'>
+		<%= link_to "Upcoming Events" %>
+	</div>
+	
+	<div class='grid_2'>
+		<%= link_to "Contact", :controller => "pages", :action => "contact" %>
+	</div>	
+	
+    <div class="clear"></div>
+    
+</div>
+
+<div id="content" class="container_12">
+	<%= "Don't be an idiot #{flash[:message]}" if flash[:message] %>
+<%= yield %>
+<div class="clear"></div> 
+</div>
+</body>
+</html>
